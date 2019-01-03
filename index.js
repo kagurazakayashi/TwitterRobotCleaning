@@ -21,3 +21,17 @@ function yaShowHide(yaObj,yaisshow) {
         yaObj.css("display","none");
     }
 }
+//筛选资料卡图片
+function yaTBG() {
+    yaRL();
+    yaGridCell.each(function(){
+        let yaCellN = $(this).find(".u-linkComplex-target").text();
+        let yaCell = $(this).find(".ProfileCard-bg").css("background-image");
+        if (yaCell == "none") {
+            yalog("无背景："+yaCellN);
+            yaShowHide($(this),true);
+        } else {
+            yaShowHide($(this),false);
+        }
+    });
+}
