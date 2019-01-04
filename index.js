@@ -35,3 +35,17 @@ function yaTBG() {
         }
     });
 }
+//筛选空白头像
+function yaTBG() {
+    yaRL();
+    yaGridCell.each(function(){
+        let yaCellN = $(this).find(".u-linkComplex-target").text();
+        let yaCell = $(this).find(".ProfileCard-avatarImage").attr("src");
+        if (yaCell == "https://abs.twimg.com/sticky/default_profile_images/default_profile_bigger.png") {
+            yalog("无头像："+yaCellN);
+            yaShowHide($(this),true);
+        } else {
+            yaShowHide($(this),false);
+        }
+    });
+}
