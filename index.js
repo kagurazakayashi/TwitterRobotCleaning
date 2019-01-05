@@ -49,3 +49,42 @@ function yaTBG() {
         }
     });
 }
+//显示用户名
+function yaCellName(yaCellCharType,yaCellCharTypeNew) {
+    var yaCellCharTypeC = yaCellCharType[0];
+    var yaCellCharConv = yaCellCharType[1];
+    if (yaCellCharTypeC != yaCellCharTypeNew) {
+        yaCellCharConv++;
+        yaCellCharTypeC = yaCellCharTypeNew;
+    } else {
+        yaCellCharConv--;
+    }
+    return [yaCellCharTypeC,yaCellCharConv];
+}
+//检查随机用户名
+function yaTRO() {
+    yaRL();
+    yaGridCell.each(function(){
+        let yaCell = $(this).find(".u-linkComplex-target").text();
+        let yaCellLength = yaCell.length;
+        var yaCellCharType = [0,0];
+        for(yaCelli=0;yaCelli<yaCellLength;yaCelli++){
+            let yaCellChar = yaCell.charAt(yaCelli);
+            if (yaCellChar.match(/^.*[A-Z]+.*$/) != null) {
+                yaCellCharType = yaCellName(yaCellCharType,1);
+            } else if (yaCellChar.match(/^.*[a-z]+.*$/) != null) {
+                yaCellCharType = yaCellName(yaCellCharType,2);
+            } else if (yaCellChar.match(/^.*[0-9]+.*$/) != null) {
+                yaCellCharType = yaCellName(yaCellCharType,3);
+            } else {
+                yaCellCharType = yaCellName(yaCellCharType,4);
+            }
+        }
+        yalog("用户名："+yaCell+"，可疑级别："+yaCellCharType[1]);
+        if (yaCellCharType[1] > 0) {
+            yaShowHide($(this),true);
+        } else {
+            yaShowHide($(this),false);
+        }
+    });
+}
